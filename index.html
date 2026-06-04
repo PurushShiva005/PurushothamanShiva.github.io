@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shivasankara Narayanan C S — Senior QA Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f5f0e8;
+      --cream: #ede8dc;
+      --gold: #b8923a;
+      --gold-light: #d4aa5a;
+      --rust: #8b3a2a;
+      --teal: #1a5c5c;
+      --teal-light: #2a8a8a;
+      --rule: #c8bfa8;
+      --muted: #6b6255;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 3rem 5rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-name span {
+      display: block;
+      color: var(--teal);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .hero-tagline {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 400px;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .btn-primary:hover {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--rule);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--ink);
+    }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-graphic {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-circle-bg {
+      width: min(500px, 90%);
+      height: min(500px, 90%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, var(--cream) 0%, var(--rule) 100%);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: scaleIn 1s ease 0.3s forwards;
+    }
+
+    .hero-circle-bg::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.15;
+    }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 4rem;
+      right: 3rem;
+      display: flex;
+      gap: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--teal);
+      display: block;
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* Decorative vertical text */
+    .side-text {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rule);
+      z-index: 10;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 6rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--cream);
+      max-width: 100%;
+      padding: 6rem 0;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .about-certs {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cert-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .cert-card:hover {
+      border-color: var(--gold);
+      transform: translateX(4px);
+    }
+
+    .cert-icon {
+      width: 36px; height: 36px;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+      color: var(--paper);
+    }
+
+    .cert-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .cert-body {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--rule);
+      border: 1.5px solid var(--rule);
+    }
+
+    .skill-block {
+      background: var(--paper);
+      padding: 2rem;
+      transition: background 0.25s;
+    }
+
+    .skill-block:hover {
+      background: var(--cream);
+    }
+
+    .skill-block-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .skill-block-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      background: var(--ink);
+      max-width: 100%;
+      padding: 6rem 0;
+      color: var(--paper);
+    }
+
+    #experience .section-title { color: var(--paper); }
+    #experience .section-rule { background: #333; }
+
+    .exp-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: #333;
+    }
+
+    .exp-item {
+      padding-left: 3rem;
+      padding-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 0.4rem;
+      width: 9px; height: 9px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .exp-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .exp-company {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--paper);
+    }
+
+    .exp-role {
+      font-size: 0.88rem;
+      color: #a09880;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.9rem;
+      color: #a09880;
+      line-height: 1.7;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--teal-light);
+    }
+
+    .exp-highlight {
+      color: var(--paper);
+      font-weight: 500;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .project-card {
+      background: var(--paper);
+      padding: 2.5rem 2rem;
+      transition: background 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      background: var(--cream);
+    }
+
+    .project-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .project-impact {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--rule);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--teal);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--cream);
+      max-width: 100%;
+      padding: 6rem 0;
+    }
+
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .contact-headline em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.25s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--teal);
+      transform: translateX(5px);
+    }
+
+    .contact-link-icon {
+      width: 38px; height: 38px;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--paper);
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .contact-link-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 0.1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .footer-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 1.5rem 3rem; }
+      .hero-right { display: none; }
+      .hero-stats { position: relative; bottom: auto; right: auto; padding: 2rem 1.5rem; justify-content: center; opacity: 1; animation: none; }
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      section, .about-inner, .exp-inner, .contact-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">SNarayanan · Portfolio</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <span class="side-text">QA · Automation · Leadership</span>
+
+  <!-- HERO -->
+  <div class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Senior QA &amp; Test Automation Engineer</p>
+      <h1 class="hero-name">
+        Shivasankara
+        <span>Narayanan C S</span>
+      </h1>
+      <p class="hero-title">18+ Years · Banking · Healthcare · E-commerce</p>
+      <p class="hero-tagline">
+        Delivering quality at scale — from automated test frameworks
+        to release management. ITIL V4 &amp; ISTQB certified.
+      </p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-graphic">
+        <div class="hero-circle-bg"></div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">18+</span>
+          <span class="hero-stat-label">Years Exp.</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">22</span>
+          <span class="hero-stat-label">Apps Managed</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">40%</span>
+          <span class="hero-stat-label">Time Saved</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="about-inner">
+      <div>
+        <div class="section-header reveal">
+          <span class="section-num">01</span>
+          <h2 class="section-title">About</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="about-text reveal">
+          <p>Results-oriented Senior QA &amp; Test Automation Engineer with <strong>18+ years</strong> of experience across banking, healthcare, e-commerce, and enterprise IT sectors.</p>
+          <p>Proven expertise in <strong>Playwright (TypeScript)</strong>, <strong>Selenium WebDriver (Java)</strong>, CI/CD integration with Jenkins &amp; GitHub Actions, and API testing with REST/SOAP. Adept at leading cross-functional QA teams and designing end-to-end test strategies.</p>
+          <p>Experienced in TDD, BDD with Cucumber, defect lifecycle management, and driving measurable quality improvements. Worked at organisations including <strong>Tata Consultancy Services</strong>, <strong>IBM India</strong>, and <strong>Gulf International Bank</strong>.</p>
+          <p>M.Sc. Computer Science from Periyar University, Salem (2003–2005).</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;">Certifications</p>
+        <div class="about-certs">
+          <div class="cert-card">
+            <div class="cert-icon">✦</div>
+            <div>
+              <div class="cert-name">ITIL V4 Foundation</div>
+              <div class="cert-body">IT Service Management Best Practices</div>
+            </div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✦</div>
+            <div>
+              <div class="cert-name">ISTQB Foundation Level</div>
+              <div class="cert-body">Software Testing Principles &amp; Methodologies</div>
+            </div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✦</div>
+            <div>
+              <div class="cert-name">SCSA Level 1</div>
+              <div class="cert-body">Security Concepts &amp; Principles</div>
+            </div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">✦</div>
+            <div>
+              <div class="cert-name">Database &amp; Cloud Technologies</div>
+              <div class="cert-body">SQL, MySQL, AWS Basics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Core Skills</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-block">
+        <div class="skill-block-label">Automation</div>
+        <div class="skill-block-title">Test Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Playwright (TypeScript)</span>
+          <span class="skill-tag">Selenium WebDriver (Java)</span>
+          <span class="skill-tag">Cypress</span>
+          <span class="skill-tag">TestNG</span>
+          <span class="skill-tag">JUnit</span>
+          <span class="skill-tag">BDD / Cucumber</span>
+          <span class="skill-tag">Page Object Model</span>
+          <span class="skill-tag">Gherkin</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Testing Types</div>
+        <div class="skill-block-title">QA Expertise</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Functional</span>
+          <span class="skill-tag">Regression</span>
+          <span class="skill-tag">Smoke &amp; Sanity</span>
+          <span class="skill-tag">Integration</span>
+          <span class="skill-tag">Performance (JMeter)</span>
+          <span class="skill-tag">Security</span>
+          <span class="skill-tag">API Testing</span>
+          <span class="skill-tag">UAT</span>
+          <span class="skill-tag">Exploratory</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">DevOps &amp; Tools</div>
+        <div class="skill-block-title">CI/CD &amp; ALM</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Azure DevOps</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">REST Assured</span>
+          <span class="skill-tag">HPQC / ALM</span>
+          <span class="skill-tag">Confluence</span>
+          <span class="skill-tag">Git / GitHub</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Methodologies</div>
+        <div class="skill-block-title">Process &amp; Practice</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">Waterfall</span>
+          <span class="skill-tag">ITIL V3/V4</span>
+          <span class="skill-tag">Lean Six Sigma</span>
+          <span class="skill-tag">TDD</span>
+          <span class="skill-tag">BDD</span>
+          <span class="skill-tag">Shift-Left Testing</span>
+          <span class="skill-tag">Risk-Based Testing</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Domains</div>
+        <div class="skill-block-title">Industry Experience</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Banking (SWIFT)</span>
+          <span class="skill-tag">Core Banking</span>
+          <span class="skill-tag">Healthcare SaaS</span>
+          <span class="skill-tag">E-commerce</span>
+          <span class="skill-tag">HR Systems</span>
+          <span class="skill-tag">Enterprise IT</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Leadership</div>
+        <div class="skill-block-title">Team &amp; Delivery</div>
+        <div class="skill-tags">
+          <span class="skill-tag">QA Team Lead</span>
+          <span class="skill-tag">Release Management</span>
+          <span class="skill-tag">Vendor Co-ordination</span>
+          <span class="skill-tag">Test Strategy Design</span>
+          <span class="skill-tag">Cross-functional Teams</span>
+          <span class="skill-tag">Stakeholder Reporting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <div id="experience">
+    <div class="exp-inner">
+      <div class="section-header reveal" style="color:var(--paper)">
+        <span class="section-num" style="color:var(--gold)">03</span>
+        <h2 class="section-title" style="color:var(--paper)">Experience</h2>
+        <div class="section-rule" style="background:#333"></div>
+      </div>
+      <div class="timeline">
+
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-date">Mar 2021 – Present</span>
+            <span class="exp-company">Prowin Health Technologies</span>
+          </div>
+          <p class="exp-role">Software Test Engineer · Healthcare SaaS &amp; E-commerce</p>
+          <ul class="exp-bullets">
+            <li>Built automated suites for key e-commerce workflows using <span class="exp-highlight">Playwright with TypeScript</span> (POM), reducing manual effort by <span class="exp-highlight">30%</span>.</li>
+            <li>Designed regression suites improving post-release application stability by <span class="exp-highlight">25%</span>.</li>
+            <li>Validated end-to-end transactions: pricing, payments, click-and-collect across all devices.</li>
+            <li>Automated leave management workflows with <span class="exp-highlight">Selenium / Java</span>, cutting testing time by <span class="exp-highlight">40%</span>.</li>
+            <li>Drove REST API validation using <span class="exp-highlight">Postman &amp; REST Assured</span>; achieved 15% reduction in critical production bugs via Jira-tracked Agile sprints.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-date">Sep 2013 – Mar 2021</span>
+            <span class="exp-company">Alpha Web Solutions</span>
+          </div>
+          <p class="exp-role">Founder &amp; Technical Lead · IT Consulting (15+ clients)</p>
+          <ul class="exp-bullets">
+            <li>Directed end-to-end business operations; grew revenue <span class="exp-highlight">20% YoY</span>.</li>
+            <li>Designed and implemented scalable web-based solutions across retail, logistics, and services sectors.</li>
+            <li>Established QA &amp; automation frameworks, reducing client-reported defect rates by <span class="exp-highlight">15%</span>.</li>
+            <li>Led a team of 5–8 developers and testers; maintained a <span class="exp-highlight">95% client retention rate</span>.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-date">Sep 2007 – Aug 2012</span>
+            <span class="exp-company">Gulf International Bank (GIB)</span>
+          </div>
+          <p class="exp-role">IT – Change &amp; Release Engineer · Core Banking (ITIL V3)</p>
+          <ul class="exp-bullets">
+            <li>Managed change and release for <span class="exp-highlight">22 banking applications</span>, co-ordinating with 84+ vendors.</li>
+            <li>Served as Release Manager for major business modules: fund transfers, payments, SWIFT transactions.</li>
+            <li>Reduced post-release incidents by <span class="exp-highlight">20%</span> through rigorous regression testing and deployment rehearsals.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-date">Sep 2012 – Jul 2013</span>
+            <span class="exp-company">IBM India Pvt Ltd</span>
+          </div>
+          <p class="exp-role">Junior Global Quality Analyst · Enterprise IT Service Operations</p>
+          <ul class="exp-bullets">
+            <li>Generated SLA adherence reports and Process Behaviour Analysis (PBA) charts for service delivery managers.</li>
+            <li>Applied <span class="exp-highlight">Lean Six Sigma</span> principles to process improvement initiatives.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-date">Sep 2001 – Aug 2007</span>
+            <span class="exp-company">Tata Consultancy Services</span>
+          </div>
+          <p class="exp-role">Systems Engineer · Infrastructure &amp; Project Delivery</p>
+          <ul class="exp-bullets">
+            <li>Managed day-to-day project activities, status reporting, milestones, and risk management.</li>
+            <li>Oversaw infrastructure planning, IT component planning, and pre-sales project estimation.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Key Projects</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-period">Apr 2023 – Present</div>
+        <h3 class="project-name">ARGOS E-commerce Platform</h3>
+        <p class="project-desc">Designed and executed comprehensive test cases for a complex e-commerce platform covering search, cart, checkout, payments, and click-and-collect services. Implemented automated test suites using Playwright with TypeScript following POM design pattern.</p>
+        <div class="project-impact">↓ 15% reduction in critical defects</div>
+      </div>
+      <div class="project-card">
+        <div class="project-period">Jan 2023 – Mar 2023</div>
+        <h3 class="project-name">Leave Management System</h3>
+        <p class="project-desc">Automated end-to-end regression testing for an HR leave management workflow using Selenium WebDriver with Java. Designed test scripts covering leave requests, approvals, escalations, and reporting modules.</p>
+        <div class="project-impact">↓ 40% reduction in testing time</div>
+      </div>
+      <div class="project-card">
+        <div class="project-period">Mar 2021 – Dec 2022</div>
+        <h3 class="project-name">Regions Bank</h3>
+        <p class="project-desc">Functional and regression testing for core banking applications, ensuring compliance with industry standards and regulations. Covered account management, fund transfers, payment processing, and audit reporting workflows.</p>
+        <div class="project-impact">✓ Full regulatory compliance achieved</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <h2 class="contact-headline">
+          Let's build<br>
+          <em>quality</em><br>
+          together.
+        </h2>
+        <p style="margin-top:2rem;font-size:0.95rem;line-height:1.8;color:var(--muted);max-width:360px;">
+          Available for senior QA, test automation, and release management roles.
+          Open to contract or full-time opportunities.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:purushothamanshiva70@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">purushothamanshiva70@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+918903364237" class="contact-link">
+          <div class="contact-link-icon">✆</div>
+          <div>
+            <div class="contact-link-label">Phone</div>
+            <div class="contact-link-value">+91 89033 64237</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/shivasankara" target="_blank" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-value">linkedin.com/in/shivasankara</div>
+          </div>
+        </a>
+        <div class="contact-link" style="cursor:default">
+          <div class="contact-link-icon">◎</div>
+          <div>
+            <div class="contact-link-label">Location</div>
+            <div class="contact-link-value">Chennai, Tamil Nadu, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-copy">© 2025 Shivasankara Narayanan C S · All rights reserved</span>
+    <span class="footer-mark">S·N</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Active nav highlight
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--ink)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
